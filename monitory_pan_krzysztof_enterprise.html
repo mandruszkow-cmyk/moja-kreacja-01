@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Monitory dla Pana Krzysztofa, raport premium</title>
+<style>
+:root {
+  --bg:#0b1220;
+  --paper:#0f172a;
+  --ink:#e8eef8;
+  --muted:#9fb0c9;
+  --line:rgba(255,255,255,.08);
+  --line-strong:rgba(255,255,255,.16);
+  --panel:rgba(15,23,42,.86);
+  --panel-2:#111b31;
+  --gold:#7aa2ff;
+  --gold-2:#53c5c9;
+  --green:#49b88f;
+  --red:#d07b86;
+  --shadow:0 24px 60px rgba(0,0,0,.34);
+  --radius:28px;
+}
+* { box-sizing:border-box; }
+html, body {
+  margin:0;
+  background:
+    radial-gradient(1100px 700px at 10% -10%, rgba(122,162,255,.18), transparent 55%),
+    radial-gradient(900px 600px at 100% 0%, rgba(83,197,201,.14), transparent 52%),
+    linear-gradient(180deg, #08101d 0%, #0b1220 45%, #0d1425 100%);
+  color:var(--ink);
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+}
+.page {
+  width: min(1440px, calc(100vw - 40px));
+  margin: 22px auto 48px;
+}
+.glass {
+  background: linear-gradient(180deg, rgba(17,27,49,.88), rgba(13,20,37,.82));
+  backdrop-filter: blur(16px);
+  border:1px solid var(--line);
+  box-shadow: var(--shadow);
+}
+.hero {
+  position:relative;
+  overflow:hidden;
+  border-radius:36px;
+  padding:36px 36px 30px;
+  display:grid;
+  grid-template-columns: 1.15fr .85fr;
+  gap:24px;
+}
+.hero:before {
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(120deg, rgba(122,162,255,.10), transparent 36%),
+    radial-gradient(600px 300px at 90% 20%, rgba(83,197,201,.10), transparent 55%);
+  pointer-events:none;
+}
+.kicker {
+  display:flex; align-items:center; gap:10px;
+  font-size:12px; letter-spacing:.18em; text-transform:uppercase; color:var(--muted);
+}
+.kicker .dot {
+  width:10px; height:10px; border-radius:50%;
+  background:linear-gradient(180deg, var(--gold), var(--gold-2));
+  box-shadow:0 0 16px rgba(176,141,87,.45);
+}
+h1 {
+  margin:16px 0 12px;
+  font-size:clamp(34px, 4vw, 58px);
+  line-height:1.02;
+  letter-spacing:-.04em;
+  max-width:900px;
+}
+.lead {
+  margin:0;
+  max-width:850px;
+  font-size:18px;
+  line-height:1.65;
+  color:#dbe6f8;
+}
+.chips {
+  display:flex; flex-wrap:wrap; gap:10px; margin-top:22px;
+}
+.chip {
+  padding:10px 14px; border:1px solid var(--line); border-radius:999px;
+  background:rgba(255,255,255,.03); color:#dbe6f8; font-size:13px;
+}
+.sidebox {
+  display:grid; gap:16px;
+}
+.recommendation {
+  border-radius:28px;
+  padding:22px 22px 20px;
+  background:linear-gradient(180deg, rgba(122,162,255,.18), rgba(83,197,201,.08));
+  border:1px solid rgba(122,162,255,.22);
+}
+.recommendation .label {
+  font-size:12px; letter-spacing:.16em; text-transform:uppercase; color:#9fb0c9;
+}
+.recommendation h2 {
+  margin:10px 0 10px; font-size:28px; line-height:1.08; letter-spacing:-.03em;
+}
+.recommendation p {
+  margin:0; font-size:15px; line-height:1.65; color:#d7e2f4;
+}
+.metric-grid {
+  display:grid; grid-template-columns:repeat(3,1fr); gap:12px;
+}
+.metric {
+  border-radius:22px; padding:16px;
+  border:1px solid var(--line); background:rgba(255,255,255,.04);
+}
+.metric .m1 {
+  font-size:12px; letter-spacing:.13em; text-transform:uppercase; color:var(--muted);
+}
+.metric .m2 {
+  margin-top:8px; font-size:32px; font-weight:800; letter-spacing:-.04em;
+}
+.metric .m3 {
+  margin-top:6px; font-size:13px; line-height:1.55; color:#bfd0e8;
+}
+
+.grid2 {
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap:22px;
+  margin-top:22px;
+}
+.panel {
+  border-radius:30px;
+  padding:26px;
+}
+.panel h2 {
+  margin:0 0 8px; font-size:28px; line-height:1.1; letter-spacing:-.03em;
+}
+.panel .sub {
+  margin:0; color:var(--muted); font-size:15px; line-height:1.65;
+}
+.bullets {
+  display:grid; gap:12px; margin-top:20px;
+}
+.bullet {
+  display:grid; grid-template-columns: 18px 1fr; gap:12px;
+  padding:14px 0; border-top:1px solid var(--line);
+}
+.bullet:first-child { border-top:none; padding-top:6px; }
+.bullet .mark {
+  width:18px; height:18px; border-radius:50%; margin-top:2px;
+  background:linear-gradient(180deg, var(--gold), var(--gold-2));
+  box-shadow:0 0 14px rgba(176,141,87,.25);
+}
+.bullet b { display:block; margin-bottom:4px; font-size:15px; }
+.bullet p { margin:0; color:#d7e2f4; font-size:14px; line-height:1.6; }
+
+.section-title {
+  margin:28px 0 14px;
+  font-size:30px; letter-spacing:-.03em;
+}
+.card {
+  border-radius:30px;
+  padding:24px;
+  margin-top:18px;
+  background:linear-gradient(180deg, rgba(17,27,49,.9), rgba(13,20,37,.84));
+  border:1px solid var(--line);
+  box-shadow:var(--shadow);
+}
+.card-top {
+  display:grid; grid-template-columns: 1fr 240px; gap:18px; align-items:start;
+}
+.badge {
+  display:inline-flex; padding:8px 12px; border-radius:999px;
+  font-size:11px; letter-spacing:.16em; text-transform:uppercase;
+  background:rgba(122,162,255,.14); border:1px solid rgba(122,162,255,.22); color:#cfe1ff;
+}
+.card h3 {
+  margin:12px 0 8px; font-size:30px; line-height:1.08; letter-spacing:-.03em;
+}
+.purpose {
+  margin:0; font-size:16px; line-height:1.6; color:#d7e2f4;
+}
+.pricebox {
+  border-radius:24px; border:1px solid var(--line); background:rgba(255,255,255,.03); padding:18px;
+}
+.price {
+  font-size:34px; font-weight:800; letter-spacing:-.04em;
+}
+.score {
+  margin-top:4px; color:var(--muted); font-size:14px;
+}
+.scorebar {
+  margin-top:12px; height:10px; border-radius:999px; overflow:hidden;
+  background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.08);
+}
+.scorefill {
+  height:100%;
+  background:linear-gradient(90deg, #7aa2ff 0%, #53c5c9 100%);
+  border-radius:999px;
+}
+.spec-grid {
+  margin-top:18px;
+  display:grid; grid-template-columns:repeat(4,1fr); gap:12px;
+}
+.spec {
+  border-radius:18px; padding:14px;
+  border:1px solid var(--line); background:rgba(255,255,255,.52);
+}
+.spec span {
+  display:block; font-size:12px; letter-spacing:.12em; text-transform:uppercase; color:var(--muted);
+}
+.spec strong {
+  display:block; margin-top:8px; font-size:18px; line-height:1.35;
+}
+.proscons {
+  margin-top:18px; display:grid; grid-template-columns:1fr 1fr; gap:14px;
+}
+.pane {
+  border-radius:20px; padding:18px; border:1px solid var(--line);
+}
+.pane.good { background:rgba(73,184,143,.08); }
+.pane.warn { background:rgba(208,123,134,.08); }
+.pane-title {
+  font-size:13px; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); margin-bottom:10px;
+}
+.pane ul {
+  margin:0; padding-left:18px; color:#dbe6f8; line-height:1.65; font-size:14px;
+}
+.meta-note {
+  margin-top:14px; font-size:12px; color:var(--muted);
+}
+
+.table-wrap {
+  overflow:auto; border-radius:28px; margin-top:18px;
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.03);
+}
+.table {
+  min-width:1100px;
+  display:grid;
+  grid-template-columns: 190px repeat(5, 1fr);
+}
+.tcell {
+  padding:14px 16px; border-right:1px solid var(--line); border-bottom:1px solid var(--line);
+  font-size:14px; line-height:1.5;
+}
+.tcell.head {
+  background:rgba(122,162,255,.10); font-weight:700;
+}
+.tcell.colhead {
+  font-size:13px; letter-spacing:.08em; text-transform:uppercase; font-weight:700;
+  background:rgba(255,255,255,.05);
+}
+.tcell:last-child { border-right:none; }
+
+.setup {
+  margin-top:22px;
+  border-radius:30px;
+  padding:26px;
+}
+.setup-grid {
+  display:grid; grid-template-columns: 1.05fr .95fr; gap:24px; align-items:center;
+}
+.diagram {
+  border-radius:24px; border:1px solid var(--line); background:linear-gradient(180deg,#10192d,#0c1527);
+  padding:22px;
+}
+.legend {
+  display:flex; gap:10px; flex-wrap:wrap; margin-top:14px;
+}
+.legend .item {
+  padding:8px 12px; border-radius:999px; border:1px solid var(--line); font-size:13px; background:rgba(255,255,255,.65);
+}
+.callouts {
+  display:grid; gap:14px;
+}
+.callout {
+  border-radius:20px; border:1px solid var(--line); background:rgba(255,255,255,.04); padding:16px;
+}
+.callout h4 {
+  margin:0 0 8px; font-size:18px; letter-spacing:-.02em;
+}
+.callout p {
+  margin:0; font-size:14px; line-height:1.65; color:#d7e2f4;
+}
+
+.footer {
+  margin-top:26px;
+  border-radius:24px;
+  padding:18px 22px;
+  color:#9fb0c9;
+  font-size:12px;
+  line-height:1.7;
+}
+
+.reveal {
+  opacity:0;
+  transform: translateY(18px) scale(.985);
+  animation: rise .8s cubic-bezier(.2,.7,.2,1) forwards;
+}
+@keyframes rise {
+  0% { opacity:0; transform: translateY(18px) scale(.985); filter: blur(6px); }
+  100% { opacity:1; transform: translateY(0) scale(1); filter: blur(0); }
+}
+.float {
+  animation: floaty 7s ease-in-out infinite;
+}
+@keyframes floaty {
+  0%,100% { transform: translateY(0px); box-shadow: 0 18px 40px rgba(0,0,0,.18); }
+  50% { transform: translateY(-10px); box-shadow: 0 28px 60px rgba(0,0,0,.24); }
+}
+.card, .panel, .setup, .hero, .footer {
+  position: relative;
+}
+.card::after, .panel::after, .setup::after, .hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: linear-gradient(135deg, rgba(255,255,255,.06), transparent 28%, transparent 72%, rgba(83,197,201,.06));
+  opacity: .9;
+}
+.card:hover {
+  transform: translateY(-4px);
+  transition: transform .35s ease, box-shadow .35s ease, border-color .35s ease;
+  box-shadow: 0 30px 70px rgba(0,0,0,.28);
+  border-color: rgba(122,162,255,.18);
+}
+.metric, .chip, .spec, .callout, .pricebox, .pane {
+  transition: transform .28s ease, border-color .28s ease, background .28s ease, box-shadow .28s ease;
+}
+.metric:hover, .chip:hover, .spec:hover, .callout:hover, .pricebox:hover, .pane:hover {
+  transform: translateY(-2px);
+  border-color: rgba(122,162,255,.2);
+  box-shadow: 0 16px 36px rgba(0,0,0,.18);
+}
+
+@media (max-width: 1100px) {
+  .hero, .grid2, .setup-grid, .card-top, .proscons { grid-template-columns: 1fr; }
+  .metric-grid { grid-template-columns:1fr; }
+  .spec-grid { grid-template-columns:repeat(2,1fr); }
+}
+@media (max-width: 720px) {
+  .page { width:min(100vw - 18px, 1440px); margin:10px auto 24px; }
+  .hero, .panel, .setup, .card { padding:20px; }
+  .spec-grid { grid-template-columns:1fr; }
+}
+</style>
+</head>
+<body>
+<div class="page">
+  <section class="hero glass reveal">
+    <div>
+      <div class="kicker"><span class="dot"></span>Raport zakupowy premium, przygotowany dla Pana Krzysztofa</div>
+      <h1>Monitory do pracy księgowej, czytelność faktur, ergonomia stanowiska i rozsądny budżet</h1>
+      <p class="lead">
+        Ten materiał został zbudowany pod realny profil pracy księgowego. Priorytetem nie są parametry gamingowe.
+        Priorytetem są: ostrość tekstu, przestrzeń robocza, wygoda pracy na PDF, fakturach, deklaracjach i arkuszach,
+        porządek na biurku oraz niskie zmęczenie wzroku w długich blokach pracy.
+      </p>
+      <div class="chips">
+        <div class="chip">Budżet: 1 000–2 200 zł</div>
+        <div class="chip">Profil: księgowość, faktury, PIT, Excel, PDF</div>
+        <div class="chip">Główny format: 34" UWQHD</div>
+        <div class="chip">Alternatywy: flat 34", 32" 4K</div>
+        <div class="chip">Cel: zakup bez nietrafionego kompromisu</div>
+      </div>
+    </div>
+
+    <div class="sidebox">
+      <div class="recommendation float">
+        <div class="label">Rekomendacja końcowa</div>
+        <h2>Dell Plus S3425DW jako wybór główny, iiyama XCB3497 jako wybór najbardziej praktyczny</h2>
+        <p>
+          Jeśli Pan Krzysztof chce po prostu kupić dobry monitor i zamknąć temat, najlepszym wyborem pozostaje Dell Plus S3425DW.
+          Jeśli ważniejsze jest jedno-kablowe stanowisko pracy z laptopem i minimalizacja dodatkowego osprzętu,
+          iiyama XCB3497WQSNP-B1 daje więcej funkcji roboczych.
+        </p>
+      </div>
+
+      <div class="metric-grid">
+        <div class="metric">
+          <div class="m1">Optymalny PPI</div>
+          <div class="m2">109–110</div>
+          <div class="m3">To bezpieczny poziom ostrości tekstu dla 27 QHD i 34 UWQHD.</div>
+        </div>
+        <div class="metric">
+          <div class="m1">Najpraktyczniejszy Hz</div>
+          <div class="m2">100–120</div>
+          <div class="m3">Nie jest konieczne, ale poprawia płynność przewijania i pracy w systemie.</div>
+        </div>
+        <div class="metric">
+          <div class="m1">Najostrzejszy tekst</div>
+          <div class="m2">32" 4K</div>
+          <div class="m3">Wyższe PPI daje wyraźną przewagę przy długim czytaniu dokumentów.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="grid2">
+    <div class="panel glass reveal" style="animation-delay:.08s">
+      <h2>Co naprawdę ma znaczenie dla księgowego</h2>
+      <p class="sub">Nie każdy duży monitor jest dobry do pracy z dokumentami. Część modeli wygląda dobrze w specyfikacji, ale słabo wypada przy tekście i codziennym użytkowaniu.</p>
+      <div class="bullets">
+        <div class="bullet"><div class="mark"></div><div><b>PPI i rozdzielczość</b><p>To jeden z najważniejszych parametrów. 34 cale przy 3440 × 1440 daje około 109 PPI. To dobry poziom do faktur i arkuszy. 32 cale 4K daje około 140 PPI i jeszcze ostrzejszy tekst.</p></div></div>
+        <div class="bullet"><div class="mark"></div><div><b>Ergonomia</b><p>Regulacja wysokości, pochylenia i poprawne ustawienie względem oczu są ważniejsze niż marketingowe 1 ms czy HDR.</p></div></div>
+        <div class="bullet"><div class="mark"></div><div><b>USB-C i docking</b><p>Jeśli monitor ma obsługiwać laptop firmowy, USB-C z ładowaniem i hubem realnie upraszcza stanowisko pracy.</p></div></div>
+        <div class="bullet"><div class="mark"></div><div><b>Format pracy</b><p>34" UWQHD wygrywa, gdy często porównuje się dokument z dokumentem. 32" 4K wygrywa, gdy liczy się maksymalna ostrość i klasyczny układ 16:9.</p></div></div>
+      </div>
+    </div>
+
+    <div class="panel glass reveal" style="animation-delay:.14s">
+      <h2>Najczęstsze błędy zakupowe</h2>
+      <p class="sub">To są błędy, które najczęściej psują doświadczenie mimo wydanych pieniędzy.</p>
+      <div class="bullets">
+        <div class="bullet"><div class="mark"></div><div><b>34" Full HD</b><p>To zły kierunek. Piksel jest za duży, tekst staje się miękki, a duży ekran nie przekłada się na jakość pracy.</p></div></div>
+        <div class="bullet"><div class="mark"></div><div><b>Ignorowanie panelu i kątów widzenia</b><p>VA daje mocny kontrast, IPS zwykle daje przyjemniejsze patrzenie na tekst pod kątem i bardziej neutralny obraz.</p></div></div>
+        <div class="bullet"><div class="mark"></div><div><b>Brak planu pod drugi monitor</b><p>Przy układzie 34 + 24 trzeba zaplanować rolę każdego ekranu. Inaczej boczny monitor zaczyna przeszkadzać zamiast pomagać.</p></div></div>
+        <div class="bullet"><div class="mark"></div><div><b>Przesadzanie z Hz</b><p>60 Hz wystarczy, 100–120 Hz jest przyjemniejsze. Powyżej tego korzyść dla księgowości jest marginalna.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <h2 class="section-title">Zestawienie 5 najlepszych propozycji</h2>
+  
+    <section class="card reveal" style="animation-delay:0.08s">
+      <div class="card-top">
+        <div>
+          <div class="badge">Benchmark, best overall</div>
+          <h3>1. Dell Plus S3425DW</h3>
+          <p class="purpose">Najbezpieczniejszy zakup, balans ceny, jakości i ergonomii</p>
+        </div>
+        <div class="pricebox">
+          <div class="price">1 570 zł</div>
+          <div class="score">9.4/10</div>
+          
+    <div class="scorebar">
+      <div class="scorefill" style="width:94%"></div>
+    </div>
+    
+        </div>
+      </div>
+
+      <div class="spec-grid">
+        <div class="spec"><span>Przekątna</span><strong>34"</strong></div>
+        <div class="spec"><span>Rozdzielczość</span><strong>3440 × 1440</strong></div>
+        <div class="spec"><span>PPI</span><strong>110</strong></div>
+        <div class="spec"><span>Hz</span><strong>120</strong></div>
+        <div class="spec"><span>Panel</span><strong>VA</strong></div>
+        <div class="spec"><span>Typ</span><strong>Curved</strong></div>
+        <div class="spec"><span>USB-C</span><strong>Tak, 65 W</strong></div>
+        <div class="spec"><span>Kontrast</span><strong>3000:1</strong></div>
+      </div>
+
+      <div class="proscons">
+        <div class="pane good">
+          <div class="pane-title">Mocne strony</div>
+          <ul><li>bardzo dobry balans parametrów do pracy na dokumentach</li><li>3440 × 1440 i ~109 PPI daje wyraźny tekst na 34 calach</li><li>USB-C i ergonomiczna podstawa upraszczają stanowisko pracy</li></ul>
+        </div>
+        <div class="pane warn">
+          <div class="pane-title">Ograniczenia</div>
+          <ul><li>VA daje mocny kontrast, ale nie tak czyste kąty widzenia jak IPS</li><li>nie ma tak rozbudowanego docka jak iiyama XCB</li></ul>
+        </div>
+      </div>
+
+      <div class="meta-note">Źródła danych: Cena: DELL24, specyfikacja: Dell</div>
+    </section>
+    
+    <section class="card reveal" style="animation-delay:0.16s">
+      <div class="card-top">
+        <div>
+          <div class="badge">Best workstation dock</div>
+          <h3>2. iiyama ProLite XCB3497WQSNP-B1</h3>
+          <p class="purpose">Laptop firmowy, jedno-kablowy setup, czyste biurko</p>
+        </div>
+        <div class="pricebox">
+          <div class="price">1 349 zł</div>
+          <div class="score">9.5/10</div>
+          
+    <div class="scorebar">
+      <div class="scorefill" style="width:95%"></div>
+    </div>
+    
+        </div>
+      </div>
+
+      <div class="spec-grid">
+        <div class="spec"><span>Przekątna</span><strong>34"</strong></div>
+        <div class="spec"><span>Rozdzielczość</span><strong>3440 × 1440</strong></div>
+        <div class="spec"><span>PPI</span><strong>110</strong></div>
+        <div class="spec"><span>Hz</span><strong>120</strong></div>
+        <div class="spec"><span>Panel</span><strong>VA</strong></div>
+        <div class="spec"><span>Typ</span><strong>Curved</strong></div>
+        <div class="spec"><span>USB-C</span><strong>Tak, 95 W + LAN + KVM</strong></div>
+        <div class="spec"><span>Kontrast</span><strong>3000:1</strong></div>
+      </div>
+
+      <div class="proscons">
+        <div class="pane good">
+          <div class="pane-title">Mocne strony</div>
+          <ul><li>najbardziej praktyczny model roboczy w tym budżecie</li><li>KVM i LAN realnie zastępują część funkcji stacji dokującej</li><li>dobry do hybrydowej pracy księgowego z laptopem służbowym</li></ul>
+        </div>
+        <div class="pane warn">
+          <div class="pane-title">Ograniczenia</div>
+          <ul><li>brand mniej premium niż Dell</li><li>VA, więc nadal nie jest to płaski IPS do najbardziej purystycznej pracy z tekstem</li></ul>
+        </div>
+      </div>
+
+      <div class="meta-note">Źródła danych: Cena: Amazon.pl, specyfikacja: iiyama</div>
+    </section>
+    
+    <section class="card reveal" style="animation-delay:0.24s">
+      <div class="card-top">
+        <div>
+          <div class="badge">Best value</div>
+          <h3>3. AOC CU34V5CW</h3>
+          <p class="purpose">Najniższy koszt bez zejścia do słabej klasy biurowej</p>
+        </div>
+        <div class="pricebox">
+          <div class="price">1 152 zł</div>
+          <div class="score">8.9/10</div>
+          
+    <div class="scorebar">
+      <div class="scorefill" style="width:89%"></div>
+    </div>
+    
+        </div>
+      </div>
+
+      <div class="spec-grid">
+        <div class="spec"><span>Przekątna</span><strong>34"</strong></div>
+        <div class="spec"><span>Rozdzielczość</span><strong>3440 × 1440</strong></div>
+        <div class="spec"><span>PPI</span><strong>110</strong></div>
+        <div class="spec"><span>Hz</span><strong>100</strong></div>
+        <div class="spec"><span>Panel</span><strong>VA</strong></div>
+        <div class="spec"><span>Typ</span><strong>Curved</strong></div>
+        <div class="spec"><span>USB-C</span><strong>Tak, 65 W</strong></div>
+        <div class="spec"><span>Kontrast</span><strong>3000:1</strong></div>
+      </div>
+
+      <div class="proscons">
+        <div class="pane good">
+          <div class="pane-title">Mocne strony</div>
+          <ul><li>bardzo mocna relacja ceny do funkcji</li><li>kamera i Windows Hello to plus do pracy zdalnej</li><li>nadal daje sensowną ostrość tekstu i dużą powierzchnię roboczą</li></ul>
+        </div>
+        <div class="pane warn">
+          <div class="pane-title">Ograniczenia</div>
+          <ul><li>100 Hz wystarczy, ale to mniej niż Dell i iiyama</li><li>niższa jasność i bardziej budżetowy odbiór konstrukcji</li></ul>
+        </div>
+      </div>
+
+      <div class="meta-note">Źródła danych: Cena: Amazon.pl, specyfikacja: AOC</div>
+    </section>
+    
+    <section class="card reveal" style="animation-delay:0.32s">
+      <div class="card-top">
+        <div>
+          <div class="badge">Best non-curved 34"</div>
+          <h3>4. iiyama ProLite XUB3493WQSU-B6</h3>
+          <p class="purpose">Osoba, która nie chce curved i ceni czyste kąty widzenia</p>
+        </div>
+        <div class="pricebox">
+          <div class="price">1 299 zł</div>
+          <div class="score">8.8/10</div>
+          
+    <div class="scorebar">
+      <div class="scorefill" style="width:88%"></div>
+    </div>
+    
+        </div>
+      </div>
+
+      <div class="spec-grid">
+        <div class="spec"><span>Przekątna</span><strong>34"</strong></div>
+        <div class="spec"><span>Rozdzielczość</span><strong>3440 × 1440</strong></div>
+        <div class="spec"><span>PPI</span><strong>110</strong></div>
+        <div class="spec"><span>Hz</span><strong>120</strong></div>
+        <div class="spec"><span>Panel</span><strong>IPS</strong></div>
+        <div class="spec"><span>Typ</span><strong>Flat</strong></div>
+        <div class="spec"><span>USB-C</span><strong>Nie</strong></div>
+        <div class="spec"><span>Kontrast</span><strong>1000:1</strong></div>
+      </div>
+
+      <div class="proscons">
+        <div class="pane good">
+          <div class="pane-title">Mocne strony</div>
+          <ul><li>jedyna płaska alternatywa 34 cale w tym zestawieniu</li><li>IPS zwykle daje przyjemniejsze odczytywanie tekstu pod kątem</li><li>120 Hz i wysoka jasność jak na biurowy ultrawide</li></ul>
+        </div>
+        <div class="pane warn">
+          <div class="pane-title">Ograniczenia</div>
+          <ul><li>brak USB-C to realny minus przy laptopie</li><li>kontrast IPS jest niższy niż w VA</li></ul>
+        </div>
+      </div>
+
+      <div class="meta-note">Źródła danych: Cena: x-kom, specyfikacja: iiyama / Komputronik</div>
+    </section>
+    
+    <section class="card reveal" style="animation-delay:0.40s">
+      <div class="card-top">
+        <div>
+          <div class="badge">Best non-34 alternative</div>
+          <h3>5. LG 32UN650K-W</h3>
+          <p class="purpose">Najostrzejszy tekst i klasyczny układ 16:9</p>
+        </div>
+        <div class="pricebox">
+          <div class="price">1 298 zł</div>
+          <div class="score">9.1/10</div>
+          
+    <div class="scorebar">
+      <div class="scorefill" style="width:91%"></div>
+    </div>
+    
+        </div>
+      </div>
+
+      <div class="spec-grid">
+        <div class="spec"><span>Przekątna</span><strong>31.5"</strong></div>
+        <div class="spec"><span>Rozdzielczość</span><strong>3840 × 2160</strong></div>
+        <div class="spec"><span>PPI</span><strong>140</strong></div>
+        <div class="spec"><span>Hz</span><strong>60</strong></div>
+        <div class="spec"><span>Panel</span><strong>IPS</strong></div>
+        <div class="spec"><span>Typ</span><strong>Flat</strong></div>
+        <div class="spec"><span>USB-C</span><strong>Nie</strong></div>
+        <div class="spec"><span>Kontrast</span><strong>1000:1</strong></div>
+      </div>
+
+      <div class="proscons">
+        <div class="pane good">
+          <div class="pane-title">Mocne strony</div>
+          <ul><li>31.5 cala 4K daje ~140 PPI, zdecydowanie najlepszą ostrość tekstu</li><li>świetny do długiej pracy na PDF, fakturach i arkuszach</li><li>klasyczny format 16:9 jest prosty do wdrożenia i ustawienia</li></ul>
+        </div>
+        <div class="pane warn">
+          <div class="pane-title">Ograniczenia</div>
+          <ul><li>60 Hz jest wystarczające, ale mniej przyjemne niż 100–120 Hz</li><li>brak USB-C i brak ultrawide przestrzeni roboczej</li></ul>
+        </div>
+      </div>
+
+      <div class="meta-note">Źródła danych: Cena: Allegro, specyfikacja: LG</div>
+    </section>
+    
+
+  <section class="panel glass reveal" style="animation-delay:.18s; margin-top:22px;">
+    <h2>Macierz porównawcza</h2>
+    <p class="sub">Jednym rzutem oka. To ułatwia decyzję bez czytania pełnych kart produktów.</p>
+    <div class="table-wrap">
+      <div class="table">
+        <div class="tcell head"></div>
+        <div class='tcell colhead'>Dell Plus S3425DW</div><div class='tcell colhead'>iiyama ProLite XCB3497WQSNP-B1</div><div class='tcell colhead'>AOC CU34V5CW</div><div class='tcell colhead'>iiyama ProLite XUB3493WQSU-B6</div><div class='tcell colhead'>LG 32UN650K-W</div>
+        <div class='tcell head'>Cena</div><div class='tcell'>1 570 zł</div><div class='tcell'>1 349 zł</div><div class='tcell'>1 152 zł</div><div class='tcell'>1 299 zł</div><div class='tcell'>1 298 zł</div><div class='tcell head'>Rozmiar</div><div class='tcell'>34"</div><div class='tcell'>34"</div><div class='tcell'>34"</div><div class='tcell'>34"</div><div class='tcell'>31.5"</div><div class='tcell head'>Rozdzielczość</div><div class='tcell'>3440 × 1440</div><div class='tcell'>3440 × 1440</div><div class='tcell'>3440 × 1440</div><div class='tcell'>3440 × 1440</div><div class='tcell'>3840 × 2160</div><div class='tcell head'>PPI</div><div class='tcell'>110</div><div class='tcell'>110</div><div class='tcell'>110</div><div class='tcell'>110</div><div class='tcell'>140</div><div class='tcell head'>Hz</div><div class='tcell'>120</div><div class='tcell'>120</div><div class='tcell'>100</div><div class='tcell'>120</div><div class='tcell'>60</div><div class='tcell head'>Panel</div><div class='tcell'>VA</div><div class='tcell'>VA</div><div class='tcell'>VA</div><div class='tcell'>IPS</div><div class='tcell'>IPS</div><div class='tcell head'>Curved / Flat</div><div class='tcell'>Curved</div><div class='tcell'>Curved</div><div class='tcell'>Curved</div><div class='tcell'>Flat</div><div class='tcell'>Flat</div><div class='tcell head'>USB-C</div><div class='tcell'>Tak, 65 W</div><div class='tcell'>Tak, 95 W + LAN + KVM</div><div class='tcell'>Tak, 65 W</div><div class='tcell'>Nie</div><div class='tcell'>Nie</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="setup glass reveal" style="animation-delay:.22s">
+    <h2>Setup rekomendowany, 34 cale na wprost + 24 cale obok</h2>
+    <p class="sub">To układ, który dobrze działa w księgowości, jeśli role ekranów są jasno rozdzielone.</p>
+    <div class="setup-grid">
+      <div class="diagram">
+        <svg viewBox="0 0 880 440" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="gMain" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#efe4d3"/>
+              <stop offset="100%" stop-color="#d6b98b"/>
+            </linearGradient>
+            <linearGradient id="gSide" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#f6efe5"/>
+              <stop offset="100%" stop-color="#eadcc7"/>
+            </linearGradient>
+          </defs>
+
+          <rect x="0" y="0" width="880" height="440" rx="28" fill="#0d172a"/>
+          <ellipse cx="440" cy="365" rx="260" ry="35" fill="rgba(0,0,0,.06)"/>
+          <rect x="196" y="102" width="420" height="190" rx="24" fill="url(#gMain)" stroke="rgba(0,0,0,.08)"/>
+          <rect x="226" y="125" width="360" height="144" rx="18" fill="#101b31" stroke="rgba(0,0,0,.06)"/>
+          <rect x="632" y="120" width="138" height="165" rx="18" fill="url(#gSide)" stroke="rgba(0,0,0,.08)" transform="rotate(12 701 202)"/>
+          <rect x="655" y="143" width="92" height="119" rx="12" fill="#101b31" stroke="rgba(0,0,0,.06)" transform="rotate(12 701 202)"/>
+
+          <rect x="373" y="292" width="66" height="18" rx="9" fill="#7aa2ff"/>
+          <rect x="392" y="310" width="28" height="28" rx="9" fill="#53c5c9"/>
+          <rect x="347" y="338" width="118" height="14" rx="7" fill="#27456f"/>
+
+          <path d="M139 183 C165 183, 181 170, 194 156" fill="none" stroke="#7aa2ff" stroke-width="2.2" stroke-dasharray="6 6"/>
+          <path d="M766 186 C790 192, 806 201, 817 221" fill="none" stroke="#7aa2ff" stroke-width="2.2" stroke-dasharray="6 6"/>
+          <circle cx="129" cy="183" r="9" fill="#53c5c9"/>
+          <circle cx="824" cy="225" r="9" fill="#53c5c9"/>
+
+          <text x="74" y="170" font-size="18" font-family="Inter, Arial" fill="#4d4438">główny ekran 34"</text>
+          <text x="72" y="194" font-size="14" font-family="Inter, Arial" fill="#9fb0c9">na wprost, 60–80 cm od oczu</text>
+
+          <text x="585" y="338" font-size="18" font-family="Inter, Arial" fill="#4d4438">monitor 24"</text>
+          <text x="585" y="362" font-size="14" font-family="Inter, Arial" fill="#9fb0c9">pod kątem ok. 20–30°</text>
+
+          <text x="302" y="169" font-size="18" font-family="Inter, Arial" fill="#dce6f8">Excel / system księgowy / PDF główny</text>
+          <text x="303" y="198" font-size="14" font-family="Inter, Arial" fill="#9fb0c9">centrum stanowiska i punkt skupienia wzroku</text>
+
+          <text x="650" y="178" transform="rotate(12 650 178)" font-size="13" font-family="Inter, Arial" fill="#9fb0c9">mail, Teams, kalkulator, dokument referencyjny</text>
+        </svg>
+        <div class="legend">
+          <div class="item">34" centralnie, główny ekran</div>
+          <div class="item">24" pomocniczo, nie jako drugi główny</div>
+          <div class="item">Podobna jasność na obu ekranach</div>
+        </div>
+      </div>
+
+      <div class="callouts">
+        <div class="callout">
+          <h4>Rola głównego monitora 34"</h4>
+          <p>Tu powinny trafiać Excel, system księgowy, faktury, PDF główny i wszystkie zadania wymagające skupienia. Ten ekran ma być ustawiony centralnie, nie bokiem.</p>
+        </div>
+        <div class="callout">
+          <h4>Rola mniejszego monitora 24"</h4>
+          <p>To ekran pomocniczy. Najlepiej przeznaczyć go na mail, Teams, komunikator, kalkulator, ewentualnie dokument referencyjny. Nie warto przenosić na niego głównych tabel i długiej pracy wzrokowej.</p>
+        </div>
+        <div class="callout">
+          <h4>Najlepsza geometria</h4>
+          <p>Górna krawędź głównego ekranu powinna być mniej więcej na wysokości wzroku lub minimalnie niżej. Boczny monitor ustaw lekko do środka, pod kątem około 20–30 stopni.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="grid2">
+    <div class="panel glass reveal" style="animation-delay:.26s">
+      <h2>Porady do nowego monitora</h2>
+      <p class="sub">Te kroki warto zrobić od razu po rozpakowaniu.</p>
+      <div class="bullets">
+        <div class="bullet"><div class="mark"></div><div><b>Ustaw skalowanie systemu świadomie</b><p>Dla 34 UWQHD zwykle dobrze działa 100%. Dla 32 4K warto zwykle zacząć od 125% lub 150%, żeby tekst nie był zbyt drobny.</p></div></div>
+        <div class="bullet"><div class="mark"></div><div><b>Sprawdź realne Hz w systemie</b><p>Po podłączeniu monitor może domyślnie pracować niżej niż potrafi. Trzeba to ustawić ręcznie w systemie i upewnić się, że kabel obsługuje pełny tryb.</p></div></div>
+        <div class="bullet"><div class="mark"></div><div><b>Zmniejsz fabryczną jasność</b><p>Nowe monitory często świecą za mocno. Do pracy biurowej zwykle lepiej zejść niżej, szczególnie wieczorem.</p></div></div>
+        <div class="bullet"><div class="mark"></div><div><b>Włącz tryby ochrony wzroku z umiarem</b><p>Flicker-free i ograniczenie niebieskiego światła mają sens, ale zbyt ciepły obraz może męczyć. Szukaj balansu, nie maksymalnej filtracji.</p></div></div>
+      </div>
+    </div>
+
+    <div class="panel glass reveal" style="animation-delay:.30s">
+      <h2>Porady ergonomiczne</h2>
+      <p class="sub">To daje większy efekt niż pogoń za parametrami marketingowymi.</p>
+      <div class="bullets">
+        <div class="bullet"><div class="mark"></div><div><b>Odległość od oczu</b><p>Dla 34 cali rozsądny start to około 60–80 cm. Jeśli siedzisz bliżej, zwiększa się ruch gałek ocznych i zmęczenie.</p></div></div>
+        <div class="bullet"><div class="mark"></div><div><b>Linia wzroku</b><p>Środek ekranu nie powinien być zbyt wysoko. Najczęściej lepiej, gdy patrzysz lekko w dół niż lekko w górę.</p></div></div>
+        <div class="bullet"><div class="mark"></div><div><b>Spójność jasności</b><p>Jeżeli 34" i 24" świecą zupełnie inaczej, oczy szybciej się męczą. Wyrównaj jasność i temperaturę barwową obu ekranów.</p></div></div>
+        <div class="bullet"><div class="mark"></div><div><b>Regularne przerwy wzrokowe</b><p>Co 20–30 minut warto spojrzeć dalej niż monitor. To szczególnie ważne przy pracy na drobnym tekście i liczbach.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel glass reveal" style="animation-delay:.34s; margin-top:22px;">
+    <h2>Końcowa rekomendacja zakupowa</h2>
+    <p class="sub">
+      Jeśli decyzja ma być szybka i bezpieczna, wybór jest prosty.
+    </p>
+    <div class="bullets">
+      <div class="bullet"><div class="mark"></div><div><b>Najlepszy wybór ogólny</b><p><b>Dell Plus S3425DW</b>. Najlepszy balans ceny, jakości pracy i ergonomii.</p></div></div>
+      <div class="bullet"><div class="mark"></div><div><b>Najbardziej praktyczny do laptopa firmowego</b><p><b>iiyama ProLite XCB3497WQSNP-B1</b>. Najlepszy, jeśli ważny jest dock, LAN i porządek kabli.</p></div></div>
+      <div class="bullet"><div class="mark"></div><div><b>Najtańsza sensowna opcja</b><p><b>AOC CU34V5CW</b>. Schodzi z budżetu, ale nie schodzi z sensownej klasy do pracy.</p></div></div>
+      <div class="bullet"><div class="mark"></div><div><b>Najlepszy flat 34 cale</b><p><b>iiyama ProLite XUB3493WQSU-B6</b>. Dla osoby, która nie chce curved.</p></div></div>
+      <div class="bullet"><div class="mark"></div><div><b>Najlepsza alternatywa poza 34 cale</b><p><b>LG 32UN650K-W</b>. Najostrzejszy tekst i bardzo mocny wybór do długiej pracy na dokumentach.</p></div></div>
+    </div>
+  </section>
+
+  <div class="footer glass reveal" style="animation-delay:.38s">
+    Ceny są orientacyjne i odzwierciedlają najniższe znalezione oferty detaliczne w Polsce na dzień przygotowania materiału.
+    Specyfikacje pochodzą z kart producentów i materiałów produktowych. W praktyce przed zakupem warto jeszcze sprawdzić dostępność, warunki gwarancji i aktualny stan magazynowy.
+  </div>
+</div>
+</body>
+</html>
